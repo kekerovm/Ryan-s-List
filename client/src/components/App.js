@@ -1,13 +1,14 @@
 import React from "react"
-import { useExample } from "../hooks"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+
+import Home from "./Home"
 
 export default props => {
-  const { foo, get } = useExample()
-
   return (
-    <div>
-      <h1>Hello World {foo}</h1>
-      <button onClick={e => get()}>GET</button>
-    </div>
+    <Router>
+      <div>
+        <Route path="/" exact component={Home} />
+      </div>
+    </Router>
   )
 }

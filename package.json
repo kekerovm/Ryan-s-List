@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/PC-Fullstack-Spring-2020/boilerpolate#readme",
   "dependencies": {
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "config": "^3.3.0",
+    "mysql": "^2.18.1"
   },
   "boilerplate": {
     "name": "boilerplate",
