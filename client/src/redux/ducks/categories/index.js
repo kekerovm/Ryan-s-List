@@ -12,7 +12,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_CATS:
+    case GET:
       return { ...state, categories: action.payload }
     case GET_CURRENT:
       return {
@@ -41,7 +41,7 @@ function getCats() {
     axios.get("/api/categories").then(resp => {
       const data = resp.data
       dispatch({
-        type: GET_CATS,
+        type: GET,
         payload: data
       })
     })
