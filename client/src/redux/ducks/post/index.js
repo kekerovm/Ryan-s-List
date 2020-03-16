@@ -27,7 +27,7 @@ function getPost(id) {
   }
 }
 
-function createPost(slug, name, post) {
+function createPost(slug, name, post, cb) {
   return new Promise((resolve, reject) => {
     axios
       .post("/api/post", { slug, name, post })

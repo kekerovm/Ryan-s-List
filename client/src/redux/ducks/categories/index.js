@@ -6,7 +6,7 @@ const GET_CURRENT = "cats/GET_CURRENT"
 
 const initialState = {
   categories: [],
-  current: {},
+  current: "",
   posts: []
 }
 
@@ -27,22 +27,26 @@ export default (state = initialState, action) => {
 
 function getCurrent(slug) {
   return dispatch => {
-    axios.get("/api/categories").then(resp => {
+    axios.get("/api/category" + slug).then(resp => {
+      console.log(resp.data)
+
       dispatch({
         type: GET_CURRENT,
-        payload: resp.data
+        payload: {
+          category: resp.data.catName,
+          posts: resp.data.posts
+        }
       })
     })
   }
 }
 
-function getCats() {
+function getCategories() {
   return dispatch => {
-    axios.get("/api/categories").then(resp => {
-      const data = resp.data
+    axios.get("/api/cats").then(resp => {
       dispatch({
         type: GET,
-        payload: data
+        payload: resp.data
       })
     })
   }
@@ -51,8 +55,10 @@ function getCats() {
 export function useCats() {
   const dispatch = useDispatch()
   const categories = useSelector(appState => appState.catState.categories)
-  const get = () => dispatch(getCats())
+  const get = () => dispatch(getCategories())
   const getPosts = slug => dispatch(getCurrent(slug))
+  const currentCategory = useSelector(appState => appState.catState.current)
+  const posts = useSelector(appState => appState.catState.posts)
 
-  return { categories, get, getPosts }
+  return { categories, get, getPosts, posts, currentCategory }
 }
